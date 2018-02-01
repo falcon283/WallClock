@@ -1,0 +1,23 @@
+{
+    "branches": {
+        "only": ["master"]
+    },
+    "language": "objective-c",
+    "osx_image": "xcode9.2",
+    "env": "DESTINATION_iOS=\"OS=11.2,name=iPhone 7 Plus\"    DESTINATION_macOS=\"arch=x86_64\"   DESTINATION_watchOS=\"OS=4.2,name=Apple Watch Series 3 - 42mm\"   DESTINATION_tvOS=\"name=Apple TV 4K (at 1080p)\" PROJECT=\"WallClock.xcodeproj\"     SCHEME=\"WallClock\"     RUN_TESTS=\"NO\"    BUILD_SAMPLE=\"NO\"    POD_LINT=\"NO\"",
+    "script": [
+    "set -o pipefail",
+    "xcodebuild -version",
+    "xcodebuild -showsdks",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-iOS -destination \"$DESTINATION_iOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-iOS -destination \"$DESTINATION_iOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-iOS -destination \"$DESTINATION_iOS\" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-iOS -destination \"$DESTINATION_iOS\" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-macOS -destination \"$DESTINATION_macOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-macOS -destination \"$DESTINATION_macOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-macOS -destination \"$DESTINATION_macOS\" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-macOS -destination \"$DESTINATION_macOS\" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-watchOS -destination \"$DESTINATION_watchOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-watchOS -destination \"$DESTINATION_watchOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-watchOS -destination \"$DESTINATION_watchOS\" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-watchOS -destination \"$DESTINATION_watchOS\" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-tvOS -destination \"$DESTINATION_tvOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-tvOS -destination \"$DESTINATION_tvOS\" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $RUN_TESTS == \"YES\" ]; then xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-tvOS -destination \"$DESTINATION_tvOS\" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty; else xcodebuild -project \"$PROJECT\" -scheme \"$SCHEME\"-tvOS -destination \"$DESTINATION_tvOS\" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty; fi",
+    "if [ $POD_LINT == \"YES\" ]; then pod lib lint; fi"
+    ],
+    "os": "osx"
+}
