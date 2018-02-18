@@ -320,6 +320,17 @@ class WallClockTests: QuickSpec {
                     expect(clock.seconds) == ClockUnit(s)
                 }
             }
+
+            context("When calculating timeIntervalTo") {
+
+                let clock330 = WallClock(hours: 3, minutes: 30, seconds: 0)
+                let clock630 = WallClock(hours: 6, minutes: 30, seconds: 0)
+
+                it("Should have valid result") {
+                    expect(clock330.timeIntervalTo(clock630)) == 3 * 3600
+                    expect(clock630.timeIntervalTo(clock330)) == 21 * 3600
+                }
+            }
         }
     }
 }

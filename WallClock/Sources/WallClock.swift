@@ -29,6 +29,8 @@ public extension WallClock {
     static var quarterNHour: WallClock {
         return WallClock(minutes: 15)
     }
+
+    static var now: WallClock = Date().wallClock()
 }
 
 public extension WallClock {
@@ -43,6 +45,10 @@ public extension WallClock {
         _seconds = ClockSecond(t)
         _minutes = ClockMinute(t / 60)
         _hours = ClockHour(t / 3600)
+    }
+
+    func timeIntervalTo(_ wallClock: WallClock) -> TimeInterval {
+        return wallClock > self ? wallClock.timeInterval - self.timeInterval : wallClock.timeInterval - self.timeInterval + 24 * 3600
     }
 }
 
