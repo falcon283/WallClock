@@ -30,7 +30,9 @@ public extension WallClock {
         return WallClock(minutes: 15)
     }
 
-    static var now: WallClock = Date().wallClock()
+    static func now() -> WallClock {
+        return Date().wallClock()
+    }
 }
 
 public extension WallClock {

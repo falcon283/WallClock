@@ -331,6 +331,17 @@ class WallClockTests: QuickSpec {
                     expect(clock630.timeIntervalTo(clock330)) == 21 * 3600
                 }
             }
+
+            context("When using now") {
+
+                let now1 = WallClock.now()
+                sleep(2)
+                let now2 = WallClock.now()
+
+                it("Should have valid result") {
+                    expect(now1) != now2
+                }
+            }
         }
     }
 }
